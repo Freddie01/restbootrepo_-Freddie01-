@@ -54,6 +54,7 @@ public class TodosResource {
 	}
 	
 	// TODO: Use the @RequestMapping annotation:
+	@RequestMapping(method = RequestMethod.POST, produces = { "application/json", "application/xml"  })
 	// 		 Define method for a POST request
 	// 		 Define the attribute so that the client 
 	//		 passes a JSON object in the body of the POST request
