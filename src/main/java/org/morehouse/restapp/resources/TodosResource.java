@@ -55,6 +55,7 @@ public class TodosResource {
 	
 	// TODO: Use the @RequestMapping annotation:
 	@RequestMapping(method = RequestMethod.POST, produces = { "application/json", "application/xml"  })
+	// I finished this
 	// 		 Define method for a POST request
 	// 		 Define the attribute so that the client 
 	//		 passes a JSON object in the body of the POST request
@@ -103,4 +104,13 @@ public class TodosResource {
 
 		return ResponseEntity.noContent().build();
 	}
+	static boolean validateUpdate(Todo existing, Todo update)
+	{
+		// return true
+		if (existing.getAssignee() == null && update.getAssignee() == null)
+			return true;
+		else
+		return update.getAssignee() != null;
+	}
+
 }
