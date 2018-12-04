@@ -11,7 +11,7 @@ public class UpdateToDoTest {
 	@Test
 	public void testChangeAssignee() {
 		// setup
-		TodosResource resource = new TodosResource();
+		//TodosResource resource = new TodosResource();
 		Todo existing = new Todo();
 		existing.setAssignee("someone");
 		Todo update = new Todo();
