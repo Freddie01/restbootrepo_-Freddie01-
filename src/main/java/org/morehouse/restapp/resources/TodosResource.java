@@ -46,6 +46,7 @@ public class TodosResource {
 	// To test: http://localhost:7070/morehouse/restapp/todos/1
 	//   HTTP method: GET
     //   Accept:  application/json   or application/xml
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET, produces = { "application/json", "application/xml"  })
 	public Todo retrieveTodo(@PathVariable long id) {
 		// Retrieve a row from the todo table in the H2 database
 		// using the id passed by client via URL
@@ -55,6 +56,7 @@ public class TodosResource {
 	
 	// TODO: Use the @RequestMapping annotation:
 	@RequestMapping(method = RequestMethod.POST, produces = { "application/json", "application/xml"  })
+	// I finished this
 	// 		 Define method for a POST request
 	// 		 Define the attribute so that the client 
 	//		 passes a JSON object in the body of the POST request
@@ -75,6 +77,7 @@ public class TodosResource {
 	// To test: http://localhost:7070/morehouse/restapp/todos/<id>
 	//    Note: Make sure the id you pass exists in the Todo table
 	// HTTP method: DELETE
+	 @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
 	public String deleteTodo(@PathVariable long id) {
 		todoRepository.deleteById(id);
 		return "row " + id + " deleted";
@@ -90,6 +93,7 @@ public class TodosResource {
 	// Body:  {"id":6,"title":"To Kill a Mockingbird","status":"OUT","dueDate":"2018-10-22","comment":"on-line checkout","assignee":"Robin Hood"}
 	//        This assumes there is a row in the Todos database table
 	//        with id = 6
+	 @RequestMapping(path = "/{id}", method = RequestMethod.PUT, produces = { "application/json", "application/xml"  })
 	public ResponseEntity<Object> updateTodo(@RequestBody Todo todo, @PathVariable long id) {
 
 		Optional<Todo> todoOptional = todoRepository.findById(id);
@@ -103,4 +107,13 @@ public class TodosResource {
 
 		return ResponseEntity.noContent().build();
 	}
+	static boolean validateUpdate(Todo existing, Todo update)
+	{
+		// return true
+		if (existing.getAssignee() == null && update.getAssignee() == null)
+			return true;
+		else
+		return update.getAssignee() != null;
+	}
+
 }
